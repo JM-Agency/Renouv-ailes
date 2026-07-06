@@ -1,0 +1,36 @@
+/* Renouv'ailes — design tokens. Direction "Forêt & Aube". */
+:root {
+  /* couleurs */
+  --c-pine-950: #16241C;
+  --c-pine-800: #213629;
+  --c-pine-700: #2B4232;
+  --c-moss-600: #3F5344;
+  --c-moss-400: #6E8577;
+  --c-ivory-50: #F7F3E9;
+  --c-ivory-100: #FBF9F3;
+  --c-amber-500: #E2703A;
+  --c-amber-600: #C4592A;
+  --c-ink: #16241C;
+  --c-line: #E5DFCE;
+  --c-line-dark: rgba(247, 243, 233, 0.14);
+  /* Teinte narrative des motifs topographiques (home) : forêt en haut de page, aube en bas */
+  --topo-tint: var(--c-moss-400);
+
+  /* typographie */
+  --font-display: 'Literata', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
+
+  /* rayon */
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 28px;
+  --r-full: 999px;
+
+  /* ombre */
+  --shadow-soft: 0 20px 60px -20px rgba(22, 36, 28, 0.25);
+  --shadow-card: 0 12px 32px -16px rgba(22, 36, 28, 0.18);
+
+  /* rythme */
+  --container: 1240px;
+  --gutter: clamp(20px, 5vw, 64px);
+}

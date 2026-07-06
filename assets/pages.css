@@ -1,0 +1,290 @@
+/* Composants pour les pages internes (au-delà de la home) */
+
+/* ---------- Sous-hero ---------- */
+.subhero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(140px, 18vw, 200px) 0 clamp(56px, 8vw, 88px);
+  background: var(--c-pine-950);
+  color: var(--c-ivory-50);
+}
+.subhero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.subhero-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(14, 23, 18, 0.62);
+}
+.subhero .wrap { position: relative; z-index: 1; }
+.subhero .crumb { font-size: 0.85rem; color: var(--c-moss-400); margin-bottom: 18px; }
+.subhero .crumb a { text-decoration: none; color: var(--c-moss-400); }
+.subhero .crumb a:hover { color: var(--c-ivory-50); }
+.subhero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-style: italic; font-weight: 400; max-width: 20ch; line-height: 1.05; }
+.subhero .lede { margin-top: 20px; max-width: 54ch; font-size: 1.1rem; color: var(--c-ivory-100); }
+.subhero .meta-row { margin-top: 32px; display: flex; gap: clamp(20px, 4vw, 48px); flex-wrap: wrap; border-top: 1px solid var(--c-line-dark); padding-top: 22px; }
+.subhero .meta-row div span { display: block; }
+.subhero .meta-row .k { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-amber-500); font-weight: 700; margin-bottom: 6px; }
+.subhero .meta-row .v { font-size: 0.98rem; }
+
+/* ---------- Programme sub-nav (pills entre les 3 offres) ---------- */
+.offer-switch { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px; }
+.offer-switch a {
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--c-line-dark);
+  color: var(--c-moss-400);
+}
+.offer-switch a[aria-current="page"] { background: var(--c-amber-500); border-color: var(--c-amber-500); color: var(--c-ivory-50); }
+.offer-switch a:hover:not([aria-current="page"]) { border-color: var(--c-ivory-50); color: var(--c-ivory-50); }
+
+/* ---------- Prose ---------- */
+.prose { max-width: 68ch; display: flex; flex-direction: column; gap: 20px; }
+.prose p { font-size: 1.02rem; color: var(--c-moss-600); }
+.prose strong { color: var(--c-ink); font-weight: 600; }
+.prose .pull { font-family: var(--font-display); font-style: italic; font-size: 1.5rem; color: var(--c-pine-950); line-height: 1.4; }
+
+/* ---------- Braise : trait qui s'amenuise puis revient, en boucle douce ---------- */
+.ember { display: block; }
+.ember line {
+  stroke-dasharray: 56;
+  stroke-dashoffset: 0;
+  animation: ember-decline 7s ease-in-out infinite;
+}
+@keyframes ember-decline {
+  0% { stroke-dashoffset: 0; opacity: 1; }
+  45% { stroke-dashoffset: 34; opacity: 0.35; }
+  55% { stroke-dashoffset: 34; opacity: 0.35; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ember line { animation: none; stroke-dashoffset: 28; opacity: 1; }
+}
+
+/* ---------- Deux colonnes info ---------- */
+.split-2 { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
+@media (max-width: 860px) { .split-2 { grid-template-columns: 1fr; } }
+
+/* ---------- Points libres : chacun son rythme, jamais de rencontre ---------- */
+.freefloat { position: relative; width: 160px; height: 100px; }
+.freefloat-dot { position: absolute; border-radius: 50%; background: var(--c-moss-400); }
+.freefloat-dot-a { width: 10px; height: 10px; top: 20px; left: 25px; animation: freefloat-a 14s ease-in-out infinite; }
+.freefloat-dot-b { width: 14px; height: 14px; top: 60px; left: 80px; animation: freefloat-b 18s ease-in-out infinite; }
+.freefloat-dot-c { width: 8px; height: 8px; top: 25px; left: 128px; animation: freefloat-c 11s ease-in-out infinite; }
+@keyframes freefloat-a {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(8px, -10px); }
+  45% { transform: translate(-6px, -14px); }
+  70% { transform: translate(-10px, 6px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes freefloat-b {
+  0% { transform: translate(0, 0); }
+  30% { transform: translate(-9px, 8px); }
+  55% { transform: translate(10px, 10px); }
+  80% { transform: translate(6px, -9px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes freefloat-c {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-7px, 9px); }
+  60% { transform: translate(9px, -6px); }
+  85% { transform: translate(-5px, -8px); }
+  100% { transform: translate(0, 0); }
+}
+@media (max-width: 760px) { .freefloat { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .freefloat-dot { animation: none; }
+}
+
+/* ---------- Colonnes de marge (escale-jeune-et-randonnee.html) ----------
+   Deux traces symboliques fixées dans les marges, pilotées uniquement par le
+   scroll global de la page (aucune animation en continu, purement liée à la
+   progression). L'opacité par défaut à 0 sert aussi de repli no-js/reduced-
+   motion : sans JS, la colonne reste entièrement invisible. */
+.margin-trail-left, .margin-trail-right {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 70px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+.margin-trail-left { left: calc((100vw - var(--container)) / 2 * 0.3); }
+.margin-trail-right { right: calc((100vw - var(--container)) / 2 * 0.3); }
+.margin-trail-left.is-hidden, .margin-trail-right.is-hidden { opacity: 0; }
+
+.trail-step {
+  position: absolute;
+  width: 20px;
+  height: 34px;
+  opacity: 0;
+}
+.trail-step.side-a { left: 6px; }
+.trail-step.side-b { left: 34px; }
+.trail-step svg { width: 100%; height: 100%; overflow: visible; }
+.trail-footprint { fill: var(--c-moss-600); }
+.margin-trail-right.is-dark-bg .trail-footprint { fill: var(--c-line-dark); }
+.trail-step.variant-b svg { transform: scale(0.85) rotate(9deg); transform-origin: center; }
+.trail-step.variant-c svg { transform: scale(1.12) rotate(-7deg); transform-origin: center; }
+
+.trail-mark {
+  position: absolute;
+  left: 16px;
+  border-radius: var(--r-full);
+  background: var(--c-moss-400);
+  opacity: 0;
+}
+.trail-mark.is-last { background: var(--c-amber-500); }
+
+@media (max-width: 1499px) {
+  .margin-trail-left, .margin-trail-right { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .margin-trail-left, .margin-trail-right { display: none; }
+}
+
+/* ---------- Timeline (journée type / déroulement) ---------- */
+.timeline { display: flex; flex-direction: column; position: relative; }
+.timeline-track { position: absolute; top: 0; bottom: 0; left: 54px; width: 2px; background: var(--c-line); border-radius: var(--r-full); overflow: hidden; }
+.on-dark .timeline-track { background: var(--c-line-dark); }
+.timeline-fill { position: absolute; top: 0; left: 0; width: 100%; height: 0%; background: var(--c-amber-500); border-radius: var(--r-full); }
+@media (prefers-reduced-motion: reduce) {
+  .timeline-fill { height: 100%; }
+}
+.timeline-item { display: grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 22px 0; border-top: 1px solid var(--c-line); }
+.timeline-item:first-child { border-top: none; }
+.timeline-item .time { font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--c-amber-600); }
+.timeline-item h4 { font-size: 1.02rem; font-weight: 600; font-family: var(--font-body); margin-bottom: 6px; }
+.timeline-item p { font-size: 0.92rem; color: var(--c-moss-600); }
+.on-dark .timeline-item { border-color: var(--c-line-dark); }
+.on-dark .timeline-item p { color: var(--c-moss-400); }
+.on-dark .timeline-item h4 { color: var(--c-ivory-50); }
+
+/* ---------- Mini sentier tracé (à côté d'un info-item, ex. « Randonnées ») ---------- */
+.trail-mini { display: block; margin-top: 8px; }
+.trail-mini path { stroke-dasharray: 90; stroke-dashoffset: 90; }
+.reveal.is-visible .trail-mini path { animation: trail-draw 1.6s ease-out forwards; }
+.reveal.is-visible .trail-mini path:nth-of-type(2) { animation-delay: 0.15s; }
+@keyframes trail-draw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .trail-mini path, .reveal.is-visible .trail-mini path { animation: none; stroke-dashoffset: 0; }
+}
+.no-js .trail-mini path { stroke-dashoffset: 0; }
+
+/* ---------- Grille d'infos courtes (inclus / non inclus / contre-indications) ---------- */
+.info-list { display: flex; flex-direction: column; gap: 14px; }
+.info-item { display: flex; gap: 12px; align-items: flex-start; }
+.info-item .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--c-amber-500); margin-top: 8px; flex-shrink: 0; animation: breathe 5s ease-in-out infinite; }
+.info-item p { font-size: 0.95rem; color: var(--c-moss-600); }
+.on-dark .info-item p { color: var(--c-moss-400); }
+.info-item strong { color: var(--c-ink); font-weight: 600; }
+
+/* ---------- Jauge de vitalité : se vide puis se regarnit, jamais à zéro ---------- */
+.vitality-gauge { width: 200px; height: 7px; border-radius: var(--r-full); background: var(--c-line); margin-top: 36px; overflow: hidden; }
+.vitality-gauge-fill {
+  width: 100%; height: 100%; border-radius: var(--r-full); background: var(--c-amber-500);
+  transform-origin: left; transform: scaleX(1);
+  animation: vitality-cycle 12s ease-in-out infinite;
+}
+@keyframes vitality-cycle {
+  0% { transform: scaleX(1); }
+  41.67% { transform: scaleX(0.12); }
+  50% { transform: scaleX(0.12); }
+  91.67% { transform: scaleX(1); }
+  100% { transform: scaleX(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vitality-gauge-fill { animation: none; transform: scaleX(0.5); }
+}
+.on-dark .info-item strong { color: var(--c-ivory-50); }
+
+/* ---------- Cartes de prix ---------- */
+.price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.price-card { background: var(--c-ivory-100); border: 1px solid var(--c-line); border-radius: var(--r-lg); padding: 26px; display: flex; flex-direction: column; gap: 10px; }
+.price-card .amount { font-family: var(--font-display); font-style: italic; font-size: 2rem; color: var(--c-amber-600); }
+.price-card .amount small { font-family: var(--font-body); font-style: normal; font-size: 0.9rem; color: var(--c-moss-600); }
+.price-card .label { font-size: 0.92rem; color: var(--c-moss-600); line-height: 1.4; }
+.price-card.highlight { background: var(--c-pine-950); color: var(--c-ivory-50); border-color: var(--c-pine-950); }
+.price-card.highlight .amount { color: var(--c-amber-500); }
+.price-card.highlight .label { color: var(--c-moss-400); }
+.price-note { margin-top: 18px; font-size: 0.88rem; color: var(--c-moss-600); }
+.on-dark .price-note { color: var(--c-moss-400); }
+
+/* ---------- Dates ---------- */
+.dates-list { display: flex; flex-direction: column; }
+.date-row { display: grid; grid-template-columns: 200px 1fr auto; gap: 16px; align-items: center; padding: 18px 0; border-top: 1px solid var(--c-line); }
+.date-row:first-child { border-top: none; }
+.date-row .range { font-family: var(--font-display); font-style: italic; font-size: 1.1rem; }
+.date-row .prog { font-size: 0.92rem; color: var(--c-moss-600); }
+.date-row .tag { justify-self: end; }
+@media (max-width: 640px) { .date-row { grid-template-columns: 1fr; gap: 6px; } .date-row .tag { justify-self: start; } }
+
+/* ---------- Formulaire de contact ---------- */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form-grid .full { grid-column: 1 / -1; }
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field label { font-size: 0.82rem; font-weight: 600; color: var(--c-moss-600); }
+.field input, .field select, .field textarea {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  padding: 13px 16px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--c-line);
+  background: var(--c-ivory-100);
+  color: var(--c-ink);
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: 2px solid var(--c-amber-500);
+  outline-offset: 1px;
+}
+.field textarea { resize: vertical; min-height: 120px; }
+.form-note { font-size: 0.85rem; color: var(--c-moss-600); margin-top: 18px; }
+@media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Contact direct (téléphone / email / adresse) ---------- */
+.contact-direct { display: flex; flex-direction: column; gap: 22px; }
+.contact-direct .item .k { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-amber-500); font-weight: 700; margin-bottom: 8px; }
+.contact-direct .item a, .contact-direct .item p { font-family: var(--font-display); font-style: italic; font-size: 1.3rem; text-decoration: none; }
+
+/* ---------- Home teaser cards (liens vers sous-pages) ---------- */
+.teaser-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.teaser-card { text-decoration: none; color: inherit; background: var(--c-ivory-100); border: 1px solid var(--c-line); border-radius: var(--r-lg); padding: 26px; display: flex; flex-direction: column; gap: 12px; }
+.teaser-card .eyebrow { margin-bottom: 0; }
+.teaser-card h3 { font-size: 1.15rem; font-style: italic; }
+.teaser-card p { font-size: 0.9rem; color: var(--c-moss-600); }
+.teaser-card .arrow { margin-top: auto; width: 30px; height: 30px; border-radius: var(--r-full); border: 1px solid var(--c-line); display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease, background-color 0.3s ease; }
+.teaser-card:hover .arrow { transform: translate(3px,-3px); background: var(--c-amber-500); border-color: var(--c-amber-500); color: var(--c-ivory-50); }
+@media (max-width: 860px) { .teaser-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Galerie (le-lieu) ---------- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  grid-auto-flow: dense;
+  gap: 16px;
+}
+.gallery-item { position: relative; border-radius: var(--r-md); overflow: hidden; }
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(.2, .8, .2, 1);
+}
+.gallery-item:hover img { transform: scale(1.05); }
+.gallery-item-wide { grid-column: span 2; }
+.gallery-item-tall { grid-row: span 2; }
+@media (max-width: 900px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 170px; }
+  .gallery-item-tall { grid-row: span 1; }
+}
+@media (max-width: 560px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item-wide { grid-column: span 1; }
+}

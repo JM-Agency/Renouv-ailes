@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="fr" class="no-js">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.classList.remove('no-js');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact : Renouv'ailes</title>
+<meta name="description" content="Écrivez à Renouv'ailes pour vos questions sur les séjours de jeûne et randonnée dans le Jura.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M6 30C13 22 19 25 22 20C25 15 22 9 27 6C33 15 33 25 26 32C20 38 12 37 6 30Z' fill='none' stroke='%2316241C' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="/Projects/Renouv'ailes/">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 30C13 22 19 25 22 20C25 15 22 9 27 6C33 15 33 25 26 32C20 38 12 37 6 30Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      renouv'ailes
+    </a>
+    <ul class="nav-links">
+      <li><a href="jeuner.html">Le jeûne</a></li>
+      <li class="has-dropdown"><a href="escale-jeune-et-randonnee.html">Notre offre<svg class="caret" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></a><div class="dropdown-panel"><a href="decouverte.html">Séjour découverte</a><a href="escale-jeune-et-randonnee.html">Escale jeûne et randonnée</a><a href="jeune-medite-deconnecte.html">Jeûne, médite, déconnecte</a></div></li>
+      <li><a href="le-lieu.html">Le lieu</a></li>
+      <li><a href="dates-et-tarifs.html">Dates et tarifs</a></li>
+      <li><a href="equipe.html">L'équipe</a></li>
+    </ul>
+    <a class="btn btn-amber magnetic nav-cta" href="contact.html">Nous écrire</a>
+    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile">
+  <a href="jeuner.html">Le jeûne</a>
+  <a href="decouverte.html">Séjour découverte</a>
+  <a href="escale-jeune-et-randonnee.html">Escale jeûne et randonnée</a>
+  <a href="jeune-medite-deconnecte.html">Jeûne, médite, déconnecte</a>
+  <a href="le-lieu.html">Le lieu</a>
+  <a href="dates-et-tarifs.html">Dates et tarifs</a>
+  <a href="equipe.html">L'équipe</a>
+  <a href="contact.html">Nous écrire</a>
+</div>
+
+<header class="subhero">
+  <video class="subhero-video" muted loop playsinline aria-hidden="true">
+    <source src="assets/images/video finie.mp4" type="video/mp4">
+  </video>
+  <div class="subhero-video-overlay" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="crumb"><a href="/Projects/Renouv'ailes/">Accueil</a> / Contact</p>
+    <h1>Nous écrire.</h1>
+    <p class="lede">Un échange préalable permet de vérifier que le séjour vous convient, avant de réserver.</p>
+    
+    
+  </div>
+</header>
+<section class="block on-cream">
+  <div class="wrap split-2">
+    <div class="reveal">
+      <span class="eyebrow">Coordonnées</span>
+      <div class="contact-direct" style="margin-top:18px;">
+        <div class="item"><span class="k">Téléphone</span><a href="tel:+41797866366">+41 79 786 63 66</a></div>
+        <div class="item"><span class="k">Email</span><a href="mailto:info@renouvailes.ch">info@renouvailes.ch</a></div>
+        <div class="item"><span class="k">Lieu</span><p>Franches-Montagnes, Jura, Suisse</p></div>
+      </div>
+      <p style="margin-top:28px; font-size:0.9rem; color:var(--c-moss-600); max-width:40ch;">Sans nouvelles dans les deux jours, merci de nous recontacter par mail ou téléphone. Il se peut que le message ne nous soit pas parvenu.</p>
+    </div>
+    <form class="reveal" action="mailto:info@renouvailes.ch" method="post" enctype="text/plain">
+      <div class="form-grid">
+        <div class="field">
+          <label for="titre">Titre</label>
+          <select id="titre" name="titre">
+            <option>Madame</option>
+            <option>Monsieur</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="nom">Nom &amp; prénom *</label>
+          <input id="nom" name="nom" type="text" required>
+        </div>
+        <div class="field">
+          <label for="adresse">Adresse</label>
+          <input id="adresse" name="adresse" type="text">
+        </div>
+        <div class="field">
+          <label for="npa">NPA &amp; localité</label>
+          <input id="npa" name="npa" type="text">
+        </div>
+        <div class="field">
+          <label for="telephone">Téléphone</label>
+          <input id="telephone" name="telephone" type="tel">
+        </div>
+        <div class="field">
+          <label for="email">Email *</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+        <div class="field full">
+          <label for="remarque">Remarque *</label>
+          <textarea id="remarque" name="remarque" required></textarea>
+        </div>
+      </div>
+      <button class="btn btn-amber magnetic" type="submit" style="margin-top:22px;">Envoyer</button>
+      <p class="form-note">* champs obligatoires</p>
+    </form>
+  </div>
+</section>
+
+
+<footer class="on-dark">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a class="footer-brand" href="/Projects/Renouv'ailes/">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 30C13 22 19 25 22 20C25 15 22 9 27 6C33 15 33 25 26 32C20 38 12 37 6 30Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          renouv'ailes
+        </a>
+        <p class="footer-tagline">Escales « jeûne et randonnée » en Suisse, dans le Jura. De vraies vacances pour le corps et l'esprit.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="jeuner.html">Le jeûne</a></li>
+          <li><a href="decouverte.html">Séjour découverte</a></li>
+          <li><a href="escale-jeune-et-randonnee.html">Escale jeûne et randonnée</a></li>
+          <li><a href="jeune-medite-deconnecte.html">Jeûne, médite, déconnecte</a></li>
+          <li><a href="le-lieu.html">Le lieu</a></li>
+          <li><a href="dates-et-tarifs.html">Dates et tarifs</a></li>
+          <li><a href="equipe.html">L'équipe</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:info@renouvailes.ch">info@renouvailes.ch</a></li>
+          <li><a href="tel:+41797866366">+41 79 786 63 66</a></li>
+          <li><a href="le-lieu.html">Franches-Montagnes, Jura</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Renouv'ailes, offre non médicale. Certificat requis en cas de traitement en cours.</span>
+      <span>© 2026 Renouv'ailes</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="assets/script.js"></script>
+</body>
+</html>

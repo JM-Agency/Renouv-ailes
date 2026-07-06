@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Étude de marché & calcul des coûts — Renouv'ailes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg-page:#F1EDE4; --bg-card:#FFFFFF;
+    --ink:#1C2029; --ink-soft:#4B4F5A; --muted:#8B8F99;
+    --line:#E4E1D8; --line-table:#E8E8E4;
+    --blue-bg:#EBF0FA; --blue-text:#3C5A86; --blue-border:#D7E1F2; --blue-row:#EAF0FA;
+    --tan-bg:#F7EFE1; --tan-border:#E9D9BC; --tan-text:#8A5A22;
+    --green-bg:#E9F4EB; --green-border:#BFDFC7; --green-text:#2A6B3F;
+    --rust:#B15A2E;
+    --font-serif:'Source Serif 4', Georgia, serif;
+    --font-sans:'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{ font-family:var(--font-sans); color:var(--ink); background:var(--bg-page); margin:0; padding:48px 16px; }
+  .sheet{ max-width:860px; margin:0 auto; background:var(--bg-card); padding:56px 64px 48px;
+    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 14px 44px rgba(0,0,0,.07); border-radius:3px; }
+
+  .kicker{ font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+
+  header.top{ display:flex; justify-content:space-between; align-items:flex-start; gap:24px; }
+  h1.doc-title{ font-family:var(--font-serif); font-size:2rem; font-weight:700; line-height:1.2; margin:0; }
+  .doc-meta{ text-align:right; font-size:.82rem; color:var(--ink-soft); line-height:1.6; white-space:nowrap; padding-top:6px; }
+  .doc-meta strong{ color:var(--ink); }
+
+  hr.rule-thick{ border:none; border-top:2px solid var(--ink); margin:22px 0 26px; }
+
+  p.intro{ font-size:.9rem; color:var(--ink-soft); line-height:1.65; max-width:64ch; margin:0 0 8px; }
+
+  h2.h-section{ font-family:var(--font-serif); font-size:1.2rem; font-weight:600; display:flex; align-items:center;
+    gap:10px; margin:44px 0 8px; }
+  .pill{ font-size:.62rem; letter-spacing:.07em; text-transform:uppercase; font-weight:700;
+    background:var(--blue-bg); color:var(--blue-text); border:1px solid var(--blue-border);
+    padding:3px 10px; border-radius:100px; }
+  p.section-note{ font-size:.86rem; color:var(--ink-soft); line-height:1.6; margin:0 0 18px; max-width:66ch; }
+
+  /* bar chart */
+  .barchart{ border:1px solid var(--line); border-radius:10px; padding:40px 22px 16px; background:#FCFBF8; }
+  .bar-track{ position:relative; display:flex; gap:6px; margin-bottom:8px; }
+  .bar-seg{ flex:1 1 0; background:#EFEAE0; border:1px solid var(--line); border-radius:100px;
+    text-align:center; font-size:.72rem; color:var(--ink-soft); padding:8px 4px; font-weight:500; }
+  .bar-seg.narrow{ flex:.55 1 0; }
+  .bar-marker{ position:absolute; top:-10px; bottom:-6px; width:2px; background:var(--rust); }
+  .bar-marker .lbl{ position:absolute; top:-24px; left:50%; transform:translateX(-50%);
+    font-family:var(--font-serif); font-weight:700; color:var(--rust); font-size:.85rem; white-space:nowrap; }
+  .bar-axis{ display:flex; justify-content:space-between; font-size:.7rem; color:var(--muted); padding:0 2px; }
+
+  table.market{ width:100%; border-collapse:collapse; margin-top:18px; }
+  table.market th{ text-align:left; font-size:.66rem; letter-spacing:.07em; text-transform:uppercase;
+    color:var(--muted); font-weight:600; padding:6px 10px 10px; border-bottom:1px solid var(--line-table); }
+  table.market td{ padding:12px 10px; border-bottom:1px solid var(--line-table); font-size:.83rem;
+    color:var(--ink-soft); vertical-align:top; }
+  table.market td:first-child, table.market th:first-child{ padding-left:0; }
+  table.market td.seg{ color:var(--ink); font-weight:600; white-space:nowrap; }
+  table.market td.range{ white-space:nowrap; font-weight:600; color:var(--ink); }
+  table.market tr.highlight td{ background:var(--blue-row); }
+  table.market tr.highlight td:first-child{ border-radius:6px 0 0 6px; }
+  table.market tr.highlight td:last-child{ border-radius:0 6px 6px 0; }
+
+  .callout{ border-radius:8px; padding:16px 20px; font-size:.85rem; line-height:1.6; margin-top:18px; }
+  .callout.tan{ background:var(--tan-bg); border:1px solid var(--tan-border); color:var(--ink-soft); }
+  .callout.tan strong{ color:var(--tan-text); }
+  .callout.green{ background:var(--green-bg); border:1px solid var(--green-border); color:var(--ink-soft); }
+
+  table.hours{ width:100%; border-collapse:collapse; margin-top:6px; }
+  table.hours th{ text-align:left; font-size:.66rem; letter-spacing:.07em; text-transform:uppercase;
+    color:var(--muted); font-weight:600; padding:6px 0 10px; border-bottom:1px solid var(--line-table); }
+  table.hours th.num{ text-align:right; }
+  table.hours td{ padding:10px 0; border-bottom:1px solid var(--line-table); font-size:.86rem; }
+  table.hours td.num{ text-align:right; font-weight:600; white-space:nowrap; }
+  table.hours tr.total td{ font-weight:700; background:var(--blue-row); border-bottom:none; }
+  table.hours tr.total td:first-child{ padding-left:10px; border-radius:6px 0 0 6px; }
+  table.hours tr.total td:last-child{ padding-right:10px; border-radius:0 6px 6px 0; }
+
+  .formula{ text-align:center; font-family:var(--font-serif); font-weight:700; font-size:1.3rem;
+    color:var(--green-text); padding:14px 0 18px; }
+  .callout.green hr{ border:none; border-top:1px solid var(--green-border); margin:0 0 14px; }
+  .callout.green p{ margin:0; }
+  .callout.green p strong{ color:var(--ink); }
+
+  .cost-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:6px; }
+  .cost-card{ border:1px solid var(--line); border-radius:10px; padding:18px 20px; }
+  .cost-card .lbl{ font-size:.66rem; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+  .cost-card .val{ font-family:var(--font-serif); font-size:1.5rem; font-weight:700; line-height:1.15; }
+  .cost-card .sub{ font-size:.78rem; color:var(--muted); margin-top:4px; }
+
+  .plans-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:6px; }
+  .plan-card{ border:1px solid var(--line); border-radius:10px; padding:20px 20px; }
+  .plan-name{ font-family:var(--font-serif); font-weight:600; font-size:1rem; margin-bottom:3px; }
+  .plan-sub{ font-size:.78rem; color:var(--muted); margin-bottom:12px; }
+  .plan-card ul{ margin:0; padding-left:16px; font-size:.8rem; color:var(--ink-soft); line-height:1.7; }
+  .plan-card ul li::marker{ color:var(--muted); }
+
+  p.note{ font-size:.85rem; color:var(--ink-soft); line-height:1.6; margin-top:16px; }
+
+  footer.sources{ margin-top:44px; padding-top:18px; border-top:1px solid var(--line);
+    font-size:.76rem; color:var(--muted); line-height:1.8; }
+  footer.sources a{ color:var(--blue-text); }
+
+  @media print{
+    @page{ margin:11mm 12mm; }
+    body{ background:#fff; padding:0; font-size:.94em; }
+    .sheet{ box-shadow:none; border-radius:0; padding:0; max-width:none; }
+    table.market tr, table.hours tr, .plan-card, .cost-card, .callout, .barchart,
+    header.top{ break-inside:avoid; }
+    h2.h-section{ break-after:avoid; margin-top:26px; }
+    .plans-grid, .cost-grid{ break-inside:avoid; }
+  }
+  @media (max-width:680px){
+    .sheet{ padding:36px 22px; }
+    header.top{ flex-direction:column; }
+    .doc-meta{ text-align:left; }
+    .cost-grid{ grid-template-columns:1fr; }
+    .plans-grid{ grid-template-columns:1fr; }
+    .bar-track{ flex-direction:column; }
+    .bar-marker{ display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="kicker">Note interne — usage JMagency</div>
+  <header class="top">
+    <h1 class="doc-title">Étude de marché<br>&amp; calcul des coûts</h1>
+    <div class="doc-meta">
+      <strong>Renouv'ailes</strong><br>
+      Franches-Montagnes, JU · 6 juillet 2026
+    </div>
+  </header>
+  <hr class="rule-thick">
+
+  <p class="intro">Positionnement prix du site vitrine et construction des tarifs de maintenance, avant émission
+  du devis. Marché suisse, prestation à distance depuis un profil freelance/boutique.</p>
+
+  <h2 class="h-section">Où se situe ce site sur le marché <span class="pill">Positionnement</span></h2>
+  <p class="section-note">Quatre segments coexistent sur le marché suisse romand de la création de site, du template
+  générique à l'agence complète.</p>
+
+  <div class="barchart">
+    <div class="bar-track">
+      <div class="bar-seg narrow">0.4–1k</div>
+      <div class="bar-seg narrow">0.8–1.5k</div>
+      <div class="bar-seg">1.5–5k</div>
+      <div class="bar-seg" style="flex:2;">5–15k+</div>
+      <div class="bar-marker" style="left:50%;"><span class="lbl">7.5k</span></div>
+    </div>
+    <div class="bar-axis"><span>0 CHF</span><span>5'000</span><span>10'000</span><span>15'000+</span></div>
+  </div>
+
+  <table class="market">
+    <thead><tr><th>Segment</th><th>Fourchette</th><th>Ce qu'on y trouve</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="seg">Package clé en main / template</td>
+        <td class="range">390 – 990 CHF</td>
+        <td>1 à 3 pages, template générique personnalisé a minima</td>
+      </tr>
+      <tr>
+        <td class="seg">Freelance, one-page basique</td>
+        <td class="range">800 – 1'500 CHF</td>
+        <td>Structure simple, peu de sur-mesure, pas de système de design</td>
+      </tr>
+      <tr>
+        <td class="seg">Freelance confirmé / sur-mesure</td>
+        <td class="range">1'500 – 5'000 CHF</td>
+        <td>Direction artistique dédiée, développement partiellement custom</td>
+      </tr>
+      <tr>
+        <td class="seg">Agence web Suisse romande</td>
+        <td class="range">5'000 – 15'000 CHF+</td>
+        <td>Studio complet : DA + dev + gestion de projet + suivi</td>
+      </tr>
+      <tr class="highlight">
+        <td class="seg">Renouv'ailes (ce projet)</td>
+        <td class="range">7'500 – 11'500 CHF</td>
+        <td>Système de design complet et documenté (charte graphique dédiée), 9 pages en architecture
+        éditoriale asymétrique, motif topographique signature, animations de scroll motivées, contrastes
+        vérifiés AA</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout tan">
+    <strong>Pourquoi ce projet sort du lot « site vitrine freelance » :</strong> palette et typographies construites
+    sur-mesure et documentées dans une charte graphique dédiée (pas un thème du marché), 9 pages avec une
+    architecture éditoriale asymétrique — pas de grille générique répétée d'une page à l'autre —, un motif
+    topographique signature et des animations de scroll pensées pour rythmer la lecture plutôt que décoratives,
+    contrastes vérifiés AA et respect de <code>prefers-reduced-motion</code>. C'est un système de design multipage
+    complet livré en solo, pas un template décliné neuf fois — le prix doit refléter le travail réel.
+  </div>
+
+  <h2 class="h-section">Contre-vérification par le temps de travail <span class="pill">Heures × taux</span></h2>
+  <p class="section-note">Le marché donne une fourchette ; le calcul par poste de travail confirme qu'elle est
+  tenable sans se sous-vendre.</p>
+
+  <table class="hours">
+    <thead><tr><th>Poste</th><th class="num">Heures</th></tr></thead>
+    <tbody>
+      <tr><td>Direction artistique &amp; système de design (palette, typo, tokens)</td><td class="num">14 h</td></tr>
+      <tr><td>Architecture de contenu éditoriale — 9 pages</td><td class="num">10 h</td></tr>
+      <tr><td>Développement front-end (structure, responsive, performance)</td><td class="num">36 h</td></tr>
+      <tr><td>Animations de scroll &amp; motif topographique (GSAP, parallaxe)</td><td class="num">8 h</td></tr>
+      <tr><td>Tests multi-device, QA, corrections</td><td class="num">6 h</td></tr>
+      <tr><td>Gestion de projet &amp; allers-retours client</td><td class="num">6 h</td></tr>
+      <tr class="total"><td>Total</td><td class="num">80 h</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout green">
+    <div class="formula">80 h × 120–140 CHF/h → 9'600 – 11'200 CHF</div>
+    <hr>
+    <p>Taux freelance confirmé sur le marché suisse (80–150 CHF/h selon profil). Le calcul par le temps recoupe
+    le positionnement marché : <strong>9'800 CHF</strong> est un prix défendable, ni bradé face au travail réel,
+    ni hors marché face à une agence complète.</p>
+  </div>
+
+  <h2 class="h-section">Coûts réels de fonctionnement <span class="pill">Ce que ça coûte vraiment</span></h2>
+  <p class="section-note">Base de calcul pour construire les forfaits de maintenance sans deviner la marge.</p>
+
+  <div class="cost-grid">
+    <div class="cost-card">
+      <div class="lbl">Nom de domaine</div>
+      <div class="val">15 – 20 CHF</div>
+      <div class="sub">par an</div>
+    </div>
+    <div class="cost-card">
+      <div class="lbl">Hébergement mutualisé (CH)</div>
+      <div class="val">120 – 180 CHF</div>
+      <div class="sub">par an, site statique</div>
+    </div>
+    <div class="cost-card">
+      <div class="lbl">Certificat SSL</div>
+      <div class="val">Inclus</div>
+      <div class="sub">Let's Encrypt, standard</div>
+    </div>
+    <div class="cost-card">
+      <div class="lbl">Abonnement module réservation</div>
+      <div class="val">≈ 50 CHF</div>
+      <div class="sub">par mois, pass-through client</div>
+    </div>
+  </div>
+
+  <div class="callout tan">
+    <strong>Module de réservation (option) :</strong> intégration d'un outil existant (type SimplyBook.me, Regiondo
+    ou équivalent) plutôt qu'un moteur maison — 18 à 22 h de configuration (3 formats de séjour × catégories de
+    chambres, calendrier des 11 dates annuelles), branding et tests à 130–150 CHF/h, soit <strong>2'340 – 3'300
+    CHF</strong> en une fois. L'abonnement mensuel de l'outil (dès ~50 CHF/mois) reste facturé séparément, au
+    client ou via toi selon ce que vous convenez.
+  </div>
+
+  <h2 class="h-section">Construction des forfaits de maintenance <span class="pill">Marge incluse</span></h2>
+  <p class="section-note">Trois formules mensuelles, du socle technique minimal au suivi actif incluant la
+  supervision du module de réservation.</p>
+
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-name">Essentiel</div>
+      <div class="plan-sub">Coût réel ≈ 15 CHF/mois</div>
+      <ul>
+        <li>Hébergement + nom de domaine</li>
+        <li>Surveillance de disponibilité</li>
+        <li>Sauvegarde mensuelle</li>
+      </ul>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Confort</div>
+      <div class="plan-sub">+ ≈ 1 h de modifs/mois</div>
+      <ul>
+        <li>Tout Essentiel</li>
+        <li>1 h de modifications mineures</li>
+        <li>Sauvegardes hebdomadaires</li>
+        <li>Support prioritaire e-mail</li>
+      </ul>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Sérénité</div>
+      <div class="plan-sub">+ suivi module résa</div>
+      <ul>
+        <li>Tout Confort</li>
+        <li>2h30 de modifications/mois</li>
+        <li>Supervision module de réservation</li>
+        <li>Rapport trimestriel + tél.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="note">Prix de vente de ces formules (39 / 89 / 149 CHF/mois) détaillés dans le devis. La marge couvre
+  le temps de supervision mutualisé sur plusieurs clients, pas seulement le coût d'hébergement direct.</p>
+
+  <footer class="sources">
+    Sources marché (consultées juillet 2026) :
+    <a href="https://www.alpicode.ch/blog/prix-site-vitrine-suisse-2026">AlpiCode — Prix site vitrine Suisse 2026</a>,
+    <a href="https://mivelaz-consulting.ch/blog/budget-site-web-suisse-prix-2026">Mivelaz Consulting — Budget site web Suisse</a>,
+    <a href="https://primao.ch/blog/primao-ch-prix-site-internet-entreprise-suisse/">Primao — Prix création site internet Suisse</a>,
+    <a href="https://www.pt-pro.ch/post/prix-site-web-suisse">PT-Pro — Prix site web Suisse romande</a>,
+    <a href="https://magicheidi.ch/fr/hourly-rates">MagicHeidi — Tarifs horaires freelance CH</a>,
+    <a href="https://www.infomaniak.com/en/hosting/prices-and-characteristics">Infomaniak — Hébergement web</a>,
+    <a href="https://www.bokun.io/regiondo-pricing">Bokun — Guide prix Regiondo/Checkfront</a>.
+  </footer>
+</div>
+</body>
+</html>

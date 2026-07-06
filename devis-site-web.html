@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devis — Renouv'ailes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg-page:#F1EDE4; --bg-card:#FFFFFF;
+    --ink:#1C2029; --ink-soft:#4B4F5A; --muted:#8B8F99;
+    --line:#E4E1D8; --line-table:#E8E8E4;
+    --blue-bg:#EBF0FA; --blue-text:#3C5A86; --blue-border:#D7E1F2;
+    --navy:#223A66;
+    --option-bg:#F3E7CE; --option-border:#E6D2A4; --option-text:#8A6323;
+    --font-serif:'Source Serif 4', Georgia, serif;
+    --font-sans:'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{ font-family:var(--font-sans); color:var(--ink); background:var(--bg-page); margin:0; padding:48px 16px; }
+  .sheet{ max-width:840px; margin:0 auto; background:var(--bg-card); padding:56px 64px 48px;
+    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 14px 44px rgba(0,0,0,.07); border-radius:3px; }
+
+  header.top{ display:flex; justify-content:space-between; align-items:flex-start; }
+  .brand-name{ font-family:var(--font-serif); font-size:1.7rem; font-weight:700; }
+  .brand-tag{ font-size:.68rem; letter-spacing:.1em; color:var(--muted); margin-top:2px; }
+  .doc-meta{ text-align:right; }
+  .doc-title{ font-family:var(--font-serif); font-size:1.9rem; font-weight:700; margin-bottom:6px; }
+  .doc-sub{ font-size:.82rem; color:var(--ink-soft); line-height:1.6; }
+
+  hr.rule-thick{ border:none; border-top:2px solid var(--ink); margin:22px 0 30px; }
+
+  .parties-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:28px; }
+  .label{ font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+  .p-name{ font-weight:700; font-size:.95rem; margin-bottom:3px; }
+  .p-detail{ font-size:.85rem; color:var(--ink-soft); line-height:1.6; }
+
+  .objet-box{ background:var(--blue-bg); border:1px solid var(--blue-border); border-radius:8px;
+    padding:16px 20px; font-size:.88rem; color:var(--ink-soft); line-height:1.6; margin-bottom:36px; }
+  .objet-box strong{ color:var(--ink); }
+
+  h2.h-section{ font-family:var(--font-serif); font-size:1.15rem; font-weight:600; margin:0 0 4px; }
+  p.section-note{ font-size:.83rem; color:var(--muted); margin:0 0 14px; }
+
+  table.lines{ width:100%; border-collapse:collapse; margin-bottom:4px; }
+  table.lines thead th{ text-align:left; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--muted); font-weight:600; padding:6px 0 10px; border-bottom:1px solid var(--line-table); }
+  table.lines thead th.num{ text-align:right; }
+  table.lines td{ padding:16px 0; border-bottom:1px solid var(--line-table); vertical-align:top; font-size:.88rem; }
+  table.lines td.num{ text-align:right; font-family:var(--font-serif); font-weight:700; font-size:1rem; white-space:nowrap; padding-left:20px; }
+  .item-title{ font-weight:600; font-size:.93rem; margin-bottom:8px; }
+  table.lines ul{ margin:0; padding-left:18px; color:var(--ink-soft); font-size:.85rem; line-height:1.65; }
+  table.lines ul li::marker{ color:var(--muted); }
+
+  .tag-option{ display:inline-block; font-size:.62rem; letter-spacing:.06em; text-transform:uppercase;
+    background:var(--option-bg); color:var(--option-text); border:1px solid var(--option-border);
+    padding:2px 8px; border-radius:100px; margin-left:8px; vertical-align:middle; font-weight:700; }
+
+  .totals{ margin-top:6px; }
+  .t-row{ display:flex; justify-content:space-between; align-items:baseline; padding:14px 0;
+    border-top:1px solid var(--line-table); font-family:var(--font-serif); }
+  .t-row span:first-child{ font-size:.95rem; font-weight:500; }
+  .t-row span:last-child{ font-size:1.1rem; font-weight:700; }
+  .t-row.grand{ border-top:2px solid var(--ink); }
+  .t-row.grand span:first-child{ font-size:1.05rem; font-weight:700; }
+  .t-row.grand span:last-child{ font-size:1.4rem; }
+  p.fine-print{ font-size:.75rem; color:var(--muted); margin:10px 0 0; }
+
+  .plans-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:6px; }
+  .plan-card{ position:relative; border:1px solid var(--line); border-radius:10px; padding:22px 20px; background:var(--bg-card); }
+  .plan-card.featured{ border:2px solid var(--navy); }
+  .plan-card .badge{ position:absolute; top:-11px; left:50%; transform:translateX(-50%);
+    background:var(--navy); color:#fff; font-size:.6rem; letter-spacing:.06em; text-transform:uppercase;
+    padding:3px 10px; border-radius:100px; font-weight:700; white-space:nowrap; }
+  .plan-name{ font-family:var(--font-serif); font-weight:600; font-size:1.02rem; margin-bottom:6px; }
+  .plan-price{ font-family:var(--font-serif); font-size:1.55rem; font-weight:700; margin-bottom:14px; }
+  .plan-price span{ font-size:.8rem; font-weight:500; color:var(--muted); }
+  .plan-card ul{ margin:0; padding-left:16px; font-size:.8rem; color:var(--ink-soft); line-height:1.7; }
+  .plan-card ul li::marker{ color:var(--muted); }
+
+  .cond-box{ background:#F8F6F1; border:1px solid var(--line); border-radius:8px; padding:6px 22px; }
+  .cond-row{ display:flex; padding:12px 0; border-bottom:1px solid var(--line); font-size:.85rem; }
+  .cond-row:last-child{ border-bottom:none; }
+  .cond-row .k{ width:180px; flex-shrink:0; color:var(--muted); }
+  .cond-row .v{ color:var(--ink); }
+
+  .sign-grid{ display:grid; grid-template-columns:1fr 1fr; gap:48px; margin-top:44px; }
+  .sign-label{ font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:38px; }
+  .sign-line{ border-top:1px solid var(--ink); }
+  .sign-sub{ font-size:.8rem; color:var(--muted); margin-top:6px; }
+
+  footer.pagefoot{ margin-top:40px; padding-top:18px; border-top:1px solid var(--line);
+    text-align:center; font-size:.75rem; color:var(--muted); }
+
+  h2.h-section + .plans-grid, h2.h-section + p.section-note{ margin-top:0; }
+  h2.h-section{ margin-top:40px; }
+
+  @media print{
+    @page{ margin:11mm 12mm; }
+    body{ background:#fff; padding:0; font-size:.94em; }
+    .sheet{ box-shadow:none; border-radius:0; padding:0; max-width:none; }
+    table.lines tr, table.hours tr, .plan-card, .cost-card, .callout, .cond-row,
+    .parties-grid, .objet-box, .sign-grid, header.top{ break-inside:avoid; }
+    h2.h-section{ break-after:avoid; }
+    h2.h-section{ margin-top:26px; }
+    .plans-grid{ break-inside:avoid; }
+  }
+  @media (max-width:680px){
+    .sheet{ padding:36px 22px; }
+    header.top{ flex-direction:column; gap:18px; }
+    .doc-meta{ text-align:left; }
+    .parties-grid{ grid-template-columns:1fr; }
+    .plans-grid{ grid-template-columns:1fr; }
+    .sign-grid{ grid-template-columns:1fr; gap:28px; }
+    table.lines td.num{ padding-left:10px; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="top">
+    <div>
+      <div class="brand-name">JMagency</div>
+      <div class="brand-tag">CONCEPTION &amp; DÉVELOPPEMENT DE SITES WEB</div>
+    </div>
+    <div class="doc-meta">
+      <div class="doc-title">Devis</div>
+      <div class="doc-sub">
+        N° 2026-0706-REN<br>
+        Émis le 6 juillet 2026<br>
+        Valable 30 jours — jusqu'au 5 août 2026
+      </div>
+    </div>
+  </header>
+
+  <hr class="rule-thick">
+
+  <div class="parties-grid">
+    <div>
+      <div class="label">Émetteur</div>
+      <div class="p-name">JMagency</div>
+      <div class="p-detail">Jonas Mouttet<br>contact@jonasmouttet.com</div>
+    </div>
+    <div>
+      <div class="label">Destinataire</div>
+      <div class="p-name">Renouv'ailes</div>
+      <div class="p-detail">À l'attention de Valérie Schaller Bourquard &amp; Cédric Bourquard<br>Le Bémont, Canton du Jura (CH)</div>
+    </div>
+  </div>
+
+  <div class="objet-box">
+    <strong>Objet :</strong> conception et développement du site vitrine multipage de Renouv'ailes — séjours de jeûne
+    encadrés, randonnée et méditation, dans une ferme jurassienne du XVIII<sup>e</sup> siècle rénovée, au cœur des
+    Franches-Montagnes.
+  </div>
+
+  <h2 class="h-section">Prestation</h2>
+  <table class="lines">
+    <thead><tr><th>Description</th><th class="num">Prix</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="item-title">Site vitrine sur-mesure — 9 pages</div>
+          <ul>
+            <li>Système de design dédié — palette « Forêt &amp; Aube », typographies Literata / Hanken Grotesk, tokens — livré avec charte graphique complète</li>
+            <li>Architecture éditoriale asymétrique sur 9 pages : Accueil, Le lieu, Équipe, Jeûner, Découverte, Escale jeûne &amp; randonnée, Jeûne médité déconnecté, Dates &amp; tarifs, Contact</li>
+            <li>Motif topographique signature, silhouettes de crêtes en parallaxe, animations au scroll (GSAP)</li>
+            <li>Responsive complet, contrastes vérifiés AA, <code>prefers-reduced-motion</code> respecté</li>
+            <li>Conversion vers formulaire de contact direct — sans moteur de réservation intégré au forfait de base</li>
+            <li>2 cycles de révisions inclus</li>
+          </ul>
+        </td>
+        <td class="num">9'800 CHF</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-title">Module de réservation en ligne <span class="tag-option">OPTION</span></div>
+          <ul>
+            <li>Intégration d'un outil de réservation existant (type SimplyBook.me, Regiondo ou équivalent) sur le site</li>
+            <li>Configuration du calendrier de disponibilité pour les 3 formats de séjour et les 11 dates annuelles, par catégorie de chambre, branding aux couleurs du site, tests</li>
+            <li>Abonnement mensuel de l'outil tiers non inclus — dès env. 50 CHF/mois, souscrit et facturé séparément</li>
+          </ul>
+        </td>
+        <td class="num">+ 2'800 CHF</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="totals">
+    <div class="t-row"><span>Total sans option</span><span>9'800 CHF</span></div>
+    <div class="t-row grand"><span>Total avec module de réservation</span><span>12'600 CHF</span></div>
+  </div>
+  <p class="fine-print">Prix nets. TVA non applicable (indépendant non assujetti — art. 10 LTVA).</p>
+
+  <h2 class="h-section">Maintenance, hébergement &amp; gestion — après mise en ligne</h2>
+  <p class="section-note">Formule mensuelle, sans engagement de durée, résiliable avec un mois de préavis.</p>
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-name">Essentiel</div>
+      <div class="plan-price">39 CHF<span> / mois</span></div>
+      <ul>
+        <li>Hébergement + nom de domaine</li>
+        <li>Certificat SSL</li>
+        <li>Surveillance de disponibilité</li>
+        <li>Sauvegarde mensuelle</li>
+      </ul>
+    </div>
+    <div class="plan-card featured">
+      <div class="badge">Recommandé</div>
+      <div class="plan-name">Confort</div>
+      <div class="plan-price">89 CHF<span> / mois</span></div>
+      <ul>
+        <li>Tout Essentiel</li>
+        <li>1 h de modifications mineures / mois</li>
+        <li>Sauvegardes hebdomadaires</li>
+        <li>Support prioritaire par e-mail</li>
+      </ul>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Sérénité</div>
+      <div class="plan-price">149 CHF<span> / mois</span></div>
+      <ul>
+        <li>Tout Confort</li>
+        <li>2h30 de modifications / mois</li>
+        <li>Supervision du module de réservation (si activé)</li>
+        <li>Rapport trimestriel + support téléphonique</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="h-section">Conditions</h2>
+  <div class="cond-box">
+    <div class="cond-row"><span class="k">Acompte</span><span class="v">50 % à la signature du devis, solde à la livraison du site</span></div>
+    <div class="cond-row"><span class="k">Délai</span><span class="v">mise en ligne sous 1 semaine (développement déjà finalisé) ; module de réservation en option sous 2 à 3 semaines après validation</span></div>
+    <div class="cond-row"><span class="k">Révisions</span><span class="v">2 cycles inclus dans le forfait ; au-delà, 120 CHF/heure</span></div>
+    <div class="cond-row"><span class="k">Maintenance</span><span class="v">facturée mensuellement à partir de la mise en ligne, formule au choix ci-dessus</span></div>
+    <div class="cond-row"><span class="k">Validité du devis</span><span class="v">30 jours à compter de la date d'émission</span></div>
+  </div>
+
+  <div class="sign-grid">
+    <div>
+      <div class="sign-label">Bon pour accord — Renouv'ailes</div>
+      <div class="sign-line"></div>
+      <div class="sign-sub">Date &amp; signature</div>
+    </div>
+    <div>
+      <div class="sign-label">JMagency</div>
+      <div class="sign-line"></div>
+      <div class="sign-sub">Date &amp; signature</div>
+    </div>
+  </div>
+
+  <footer class="pagefoot">JMagency — Jonas Mouttet — contact@jonasmouttet.com</footer>
+</div>
+</body>
+</html>
