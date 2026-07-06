@@ -9,6 +9,7 @@
   color: var(--c-ivory-50);
 }
 .subhero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+@media (max-width: 760px) { .subhero-video { object-fit: contain; } }
 .subhero-video-overlay {
   position: absolute;
   inset: 0;
