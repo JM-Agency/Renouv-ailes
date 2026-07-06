@@ -215,7 +215,8 @@ button { font-family: inherit; }
 .hero-content {
   position: relative;
   z-index: 2;
-  padding: clamp(48px, 8vw, 80px) 0 clamp(56px, 9vw, 96px);
+  padding-top: clamp(48px, 8vw, 80px);
+  padding-bottom: clamp(56px, 9vw, 96px);
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
