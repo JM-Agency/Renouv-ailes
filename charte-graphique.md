@@ -68,3 +68,4 @@ Pas de banque d'images "spa" générique (pierres empilées, mains en prière, s
 - **MOTION_INTENSITY** : 6/10 — révélations au scroll, parallaxe légère, un CTA magnétique, un seul marquee.
 - **VISUAL_DENSITY** : 3/10 — très aéré, section = une idée.
 - **Système de design** : aucun framework officiel — implémentation artisanale (HTML/CSS/JS vanilla + GSAP ScrollTrigger via CDN), cohérente avec le reste du workspace (pas d'outillage Node).
+
