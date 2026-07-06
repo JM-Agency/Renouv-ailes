@@ -206,8 +206,7 @@ button { font-family: inherit; }
   color: var(--c-ivory-50);
   padding-top: 76px;
 }
-.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-@media (max-width: 760px) { .hero-video { object-fit: contain; } }
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; z-index: 0; }
 .hero-video-overlay {
   position: absolute;
   inset: 0;
