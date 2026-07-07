@@ -576,6 +576,39 @@
     });
   });
 
+  // Petit groupe de marcheurs (carte featured "Escale, jeûne et randonnée")
+  // — suit le sentier du milieu des 3 lignes topo de .topo-mini via SMIL
+  // animateMotion. Le déphasage entre les points est encodé directement dans
+  // le keyPoints/keyTimes de chaque animateMotion (retour 100%→0% instantané,
+  // même trick qu'un repeat normal), pas dans un décalage de temps réel :
+  // un beginElement() simultané suffit, le groupe est déjà régulièrement
+  // espacé dès la première image, sans période de mise en place. Fonction
+  // commune réutilisable si d'autres cartes reprennent la même mécanique.
+  // Reduced motion : ce bloc entier est ignoré (return plus haut), donc
+  // beginElement() n'est jamais appelé et les points restent visibles,
+  // immobiles, à leur position de départ sur le sentier (cx/cy de base).
+  var initSmilWalkerGroup = function (svg) {
+    if (!svg || !('IntersectionObserver' in window)) return;
+    var anims = Array.prototype.slice.call(svg.querySelectorAll('.walker animateMotion'));
+    if (!anims.length) return;
+    var started = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          if (!started) {
+            started = true;
+            anims.forEach(function (anim) { anim.beginElement(); });
+          }
+          if (svg.unpauseAnimations) svg.unpauseAnimations();
+        } else if (started && svg.pauseAnimations) {
+          svg.pauseAnimations();
+        }
+      });
+    }, { threshold: 0.2 });
+    io.observe(svg);
+  };
+  initSmilWalkerGroup(document.querySelector('.program-card.featured .topo-mini'));
+
   // Magnetic CTA — small pull toward cursor, communicates interactivity on the primary action
   document.querySelectorAll('.magnetic').forEach(function (btn) {
     var strength = 18;
